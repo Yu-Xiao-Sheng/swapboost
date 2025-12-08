@@ -3,6 +3,8 @@
 
 💻 Linuxer 桌面用户看过来：在低内存的 Ubuntu 系发行版上，打开几个浏览器和 IDE 就卡到怀疑人生？swapboost 用一条命令开启 zswap、调优动态 swapspace，加上预设和自定义开关，让桌面顺滑不再“卡成 PPT”。
 
+⭐ 如果觉得有用，请点个 Star 支持一下，让更多人受益！
+
 ## 功能
 - ✅ 通过 GRUB 启用 zswap，写入 `zswap.enabled=1`、`lz4`、`max_pool_percent=20`、`z3fold` 并执行 `update-grub`。
 - 🔌 注释默认 `/swapfile`，如在用则 `swapoff /swapfile`。

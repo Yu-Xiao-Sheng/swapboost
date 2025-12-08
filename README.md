@@ -3,6 +3,8 @@
 
 💻 Hey linuxer! Tired of your low-memory Ubuntu desktop freezing the moment you open a few browsers and IDEs? swapboost keeps things smooth by turning on zswap, tuning dynamic swapspace, and giving you friendly presets plus custom knobs—all in one command.
 
+⭐ If swapboost helps, please consider dropping a Star to support the project!
+
 ## What it does
 - ✅ Enables zswap with sane defaults (`zswap.enabled=1`, `lz4`, `max_pool_percent=20`, `z3fold`) via GRUB and runs `update-grub`.
 - 🔌 Disables the default `/swapfile` entry and `swapoff /swapfile` when present.
