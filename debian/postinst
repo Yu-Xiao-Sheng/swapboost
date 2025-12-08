@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+echo "Applying swapboost defaults..."
+if /usr/bin/swapboost apply --from-package; then
+  echo "Memory tuning applied. Reboot recommended to activate zswap."
+else
+  echo "Warning: swapboost apply failed; run 'sudo swapboost apply' manually." >&2
+fi
+
+exit 0
