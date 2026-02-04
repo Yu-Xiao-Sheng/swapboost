@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-echo "Applying swapboost defaults..."
+echo "Applying swapboost defaults (swapspace without zswap)..."
 if /usr/bin/swapboost apply --from-package; then
-  echo "Memory tuning applied. Reboot recommended to activate zswap."
+  echo "Memory tuning applied. Run 'sudo swapboost apply --enable-zswap' to enable zswap."
 else
   echo "Warning: swapboost apply failed; run 'sudo swapboost apply' manually." >&2
 fi

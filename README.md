@@ -64,7 +64,7 @@ sudo apt install ./dist/swapboost_0.1.0_all.deb
 The post-install script runs `swapboost apply` automatically (without zswap). To enable zswap, run `sudo swapboost apply --enable-zswap` after installation and reboot.
 
 ## Releases
-- Current: 0.1.0 — see [RELEASES.md](RELEASES.md) for highlights.
+- Current: 1.0 — see [RELEASES.md](RELEASES.md) for highlights.
 
 ## Notes
 - Target: Ubuntu and derivatives (requires `grub-common`, `systemd`, `swapspace`).

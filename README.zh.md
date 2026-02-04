@@ -64,7 +64,7 @@ sudo apt install ./dist/swapboost_0.1.0_all.deb
 安装后会自动执行 `swapboost apply`（不启用 zswap）。要启用 zswap，请在安装后运行 `sudo swapboost apply --enable-zswap` 并重启。
 
 ## Releases
-- 当前版本：0.1.0 — 亮点见 [RELEASES.md](RELEASES.md)。
+- 当前版本：1.0 — 亮点见 [RELEASES.md](RELEASES.md)。
 
 ## 注意事项
 - 目标：Ubuntu 及衍生发行版（依赖 `grub-common`、`systemd`、`swapspace`）。
