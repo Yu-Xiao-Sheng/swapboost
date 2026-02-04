@@ -28,18 +28,21 @@ log_error() {
 
 usage() {
   cat <<'EOF'
-swapboost — keep Ubuntu desktops smooth with zswap + dynamic swapspace.
+swapboost — keep Ubuntu desktops smooth with dynamic swapspace (zswap optional).
 
 Usage: swapboost [apply|status|rollback|set|preset|--help|--version]
-  apply               Enable zswap + swapspace using default tuning
-  status              Show current zswap/swapspace state
-  rollback            Remove zswap flags, drop tuning block, try to re-enable /swapfile
+  apply [--enable-zswap]    Enable swapspace (and optionally zswap) using default tuning
+  status                    Show current zswap/swapspace state
+  rollback                  Remove zswap flags, drop tuning block, try to re-enable /swapfile
   set --min X --max Y --lower P --upper Q   Update swapspace tuning values
   preset balanced|aggressive|conservative   Apply a predefined tuning set
   --help              Show this help
   --version           Show script version
 
 The script must run as root; it will re-exec with sudo when available.
+
+Options for 'apply':
+  --enable-zswap       Also enable zswap (disabled by default due to CPU overhead)
 EOF
 }
 
@@ -407,10 +410,14 @@ show_status() {
 
 apply_all() {
   reexec_as_root apply "$@"
+  local enable_zswap=0
   local arg
   for arg in "$@"; do
     case "$arg" in
       --from-package)
+        ;;
+      --enable-zswap)
+        enable_zswap=1
         ;;
       *)
         log_warn "Ignoring unknown apply option: $arg"
@@ -419,7 +426,13 @@ apply_all() {
   done
   require_ubuntu_like
   disable_default_swapfile
-  ensure_zswap
+  if (( enable_zswap )); then
+    ensure_zswap
+    log_info "zswap enabled via GRUB (requires reboot to take effect)."
+  else
+    log_info "zswap not enabled (use --enable-zswap to enable it)."
+    log_info "Note: zswap can increase CPU usage, especially when running many applications."
+  fi
   ensure_swapspace_package
   set_swapspace_tuning "$DEFAULT_MIN" "$DEFAULT_MAX" "$DEFAULT_LOWER" "$DEFAULT_UPPER"
   log_info "Swapboost tuning applied."
